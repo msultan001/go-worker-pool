@@ -25,14 +25,7 @@ func main() {
 		{ID: 3, Input: 30},
 		{ID: 4, Input: 40},
 	}
-	// wg.Add((nuberOfWorkers))
-	// for i := 0; i < 3; i++ {
-	// 	go func(id int) {
-	// 		worker := NewWorker(id, jobsChannel)
-	// 		defer wg.Done()
-	// 		worker.Listen()
-	// 	}(i)
-	// }
+
 	wg.Add(3)
 
 	var i int
