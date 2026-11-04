@@ -4,4 +4,5 @@ type Result struct {
 	JobID  int
 	Output int
 	Err    error
+	WorkerID int
 }
