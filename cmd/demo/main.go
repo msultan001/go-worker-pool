@@ -21,14 +21,8 @@ func main() {
 
 	numberOfWorkers := 3
 
-	jobs := []workerpool.Job{
-		{ID: 1, Input: 10},
-		{ID: 2, Input: 20},
-		{ID: 3, Input: 30},
-		{ID: 4, Input: 40},
-		{ID: 5, Input: 50},
-	}
-	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(time.Second*1))
+	
+	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(time.Second*3))
 	defer cancel()
 	wg.Add(numberOfWorkers)
 
@@ -43,14 +37,14 @@ func main() {
 		}(idx)
 	}
 
-	for _, j := range jobs {
+	for _, j := range workerpool.Jobs {
 		jobsChannel <- j
 	}
 	close(jobsChannel)
 	wg.Wait()
 	close(resultsChannel)
-	
+	fmt.Println("\t\tJobID\tOutput\tWorkerID")
 	for result:=range resultsChannel{
-		fmt.Println(result.JobID, result.Output)
+		fmt.Printf("Results Report:  %d\t%d\t%d\n", result.JobID, result.Output, result.WorkerID)
 	}
 }
